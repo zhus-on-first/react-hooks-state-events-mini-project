@@ -1,10 +1,17 @@
 import React from "react";
 import Task from "./Task";
 
-function TaskList({ tasks, deleteTask }) {
+function TaskList({ tasks, deleteTask, selectedCategory }) {
+  const categoryFilteredTask =
+    selectedCategory === "All"
+      ? tasks
+      : tasks.filter((task) => {
+          return task.category === selectedCategory;
+        });
+
   return (
     <div className="tasks">
-      {tasks.map((task, index) => {
+      {categoryFilteredTask.map((task, index) => {
         return <Task key={index} task={task} deleteTask={deleteTask} />;
       })}
     </div>
